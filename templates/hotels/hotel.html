@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %} | {{ hotel.title}} {% endblock %}
+
+
+{% block content %}
+
+<section id="showcase-inner" class="py-5 text-white">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 class="display-4">{{ hotel.title}}</h1>
+                <p class="lead">
+                    <i class="fas fa-map-marker"> </i> {{ hotel.address }} </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+    <div class="container">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'hotels' %}">Hotels</a>
+                </li>
+
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<!-- Listing -->
+<section id="listing" class="py-4">
+    <div class="container">
+        <a href="{% url 'hotels' %}" class="btn btn-light mb-4">Back To Hotels</a>
+        <div class="row">
+            <div class="col-md-9">
+                <!-- Home Main Image -->
+                <img src="{{ hotel.photo_main.url }}" alt="" class="img-main img-fluid mb-1">
+                <!-- Thumbnails -->
+                <div class="row mb-2 thumbs">
+
+                    {% if hotel.photo_1 %}
+
+                    <div class="col-md-2">
+                        <a href="{{ hotel.photo_1.url }}" data-lightbox="home-images">
+                            <img src="{{ hotel.photo_1.url }}" alt="" class="img-fluid">
+                        </a>
+                    </div>
+
+                    {% endif %}
+                    {% if hotel.photo_2 %}
+
+                    <div class="col-md-2">
+                        <a href="{{ hotel.photo_2.url }}" data-lightbox="home-images">
+                            <img src="{{ hotel.photo_2.url }}" alt="" class="img-fluid">
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if hotel.photo_3 %}
+                    <div class="col-md-2">
+                        <a href="{{ hotel.photo_2.url }}" data-lightbox="home-images">
+                            <img src="{{hotel.photo_2.url }}" alt="" class="img-fluid">
+                        </a>
+                    </div>
+
+                    {% endif %}
+
+
+                </div>
+                <!-- Fields -->
+                <div class="row mb-1 fields">
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-secondary">
+                                <i class="fas fa-money-bill-alt"> </i>Price per night:
+                                <span class="float-right">&#8358; {{hotel.price | intcomma}} avg/room</span>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-secondary">
+                                <i class="fas fa-phone"> </i> Agent's Phone:
+                                <span class="float-right"> <a href="tel:07015198239">07015198239</a>
+                                </span>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        {{ hotel.description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
